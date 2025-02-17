@@ -1,19 +1,17 @@
-# start by pulling the python image
-FROM python:3.8-alpine
+# Use official Python image
+FROM python:3.9
 
-# copy the requirements file into the image
-COPY ./requirements.txt /app/requirements.txt
-
-# switch working directory
+# Set working directory
 WORKDIR /app
 
-# install the dependencies and packages in the requirements file
+# Copy files
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-# copy every content from the local file to the image
-COPY . /app
+COPY . .
 
-# configure the container to run in an executed manner
-ENTRYPOINT [ "python" ]
+# Expose the port
+EXPOSE 5000
 
-CMD ["app.py" ]
+# Run the application
+CMD ["python", "app.py"]
